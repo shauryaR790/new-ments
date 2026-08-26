@@ -68,10 +68,17 @@ body.is-dark{ background:#08080a; --ink-2:#8e8c96; }
 .mark.is-out{ opacity:0; pointer-events:none; }
 .mark[hidden]{ display:none; }
 .mark__v{
-  width:min(42vh,42vw); height:auto; display:block;
-  /* the clip is black ink on white paper — multiply knocks the paper out
-     against any light surface, so no seam and no compression halo. */
+  width:min(98vw,82vh); height:auto; display:block;
+  overflow:visible;
   mix-blend-mode:multiply;
+}
+
+.mark__word,
+.mark__star{
+  pointer-events:none;
+}
+.mark__word{
+  will-change:opacity, filter;
 }
 
 /* ── webgl surface ──────────────────────────────────────────────────── */

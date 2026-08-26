@@ -17,8 +17,15 @@
 
   <!-- ── stage 1 · the mark ───────────────────────────────────────────── -->
   <div class="mark" id="mark" aria-hidden="true">
-    <video class="mark__v" id="markVideo" src="./assets/video/mark.mp4"
-           muted playsinline preload="auto"></video>
+    <svg class="mark__v" id="markSvg" viewBox="0 0 480 120" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="markClip">
+          <rect class="mark__mask-rect" x="0" y="0" width="0" height="120"/>
+        </clipPath>
+      </defs>
+      <g class="mark__word" clip-path="url(#markClip)"></g>
+      <g class="mark__star"></g>
+    </svg>
   </div>
 
   <!-- ── stage 2/3 · webgl (ipod, then camera) ────────────────────────── -->

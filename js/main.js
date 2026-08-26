@@ -3,11 +3,12 @@
 
 import { GL, load, IpodAct, CameraAct } from './scene.js';
 import { WorkCanvas } from './canvas.js';
+import { initMark, playMark } from './mark.js';
 
 const $ = id => document.getElementById(id);
 const body      = document.body;
 const markWrap  = $('mark');
-const markVideo = $('markVideo');
+const markSvg   = $('markSvg');
 const glCanvas  = $('gl');
 const workWrap  = $('work');
 const hint      = $('hint');
@@ -181,15 +182,9 @@ async function main(){
   const ipodModel = load('./assets/models/ipod.glb');
   const camModel  = load('./assets/models/camera.glb');
 
-  // ── the mark
-  markVideo.play().catch(() => {});
-  const markDone = new Promise(res => {
-    let fired = false;
-    const go = () => { if (!fired){ fired = true; res(); } };
-    markVideo.addEventListener('ended', go, { once:true });
-    setTimeout(go, reduced ? 900 : 5600);            // never hang on a stalled decode
-  });
-  await markDone;
+  // ── the mark (fiveo*)
+  await initMark(markSvg);
+  await playMark(markSvg, { reduced });
   if (skipped) return;
 
   markWrap.classList.add('is-out');
